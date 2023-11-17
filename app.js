@@ -3,12 +3,20 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const fs = require("fs");
+const db = require("./util/database");
 const app = express();
 
 const adminRoutes = require("/routes/admin");
 const shopRoutes = require("./routes/shop");
 const loginRoutes = require("./login");
 
+db.execute("select * from products")
+  .then((result) => {
+    console.log(result[0], result[1]);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 app.use(bodyParser.urlencoded({ extended: false }));
 appuse(cookieParser());
 
